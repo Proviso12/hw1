@@ -1,0 +1,64 @@
+
+#welcome_Headers{
+  background-color: #ffffff;
+  height:5em;
+  text-align: center;
+  font-size: x-large;
+  font-weight: 600;
+}
+#cards {
+  background-color: #af1111;
+  width:auto;
+  height: auto;
+  padding: 10px;
+}
+
+body {
+  padding: 40px;
+}
+#suits {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+button {
+  flex-grow: 1;
+  font-size: 36px;
+  border-radius: 8px;
+}
+
+#cards {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.spade card-suit:before,
+button.spade card-suit:before {
+  content: "\2660";
+  color: black;
+  display: block;
+}
+
+.heart card-suit:before,
+button.heart card-suit:before {
+  content: "\2665";
+  color: red;
+  display: block;
+}
+
+.club card-suit:before,
+button.club card-suit:before {
+  content: "\2663";
+  color: black;
+  display: block;
+}
+
+.diamond card-suit:before,
+button.diamond card-suit:before {
+  content: "\2666";
+  color: red;
+  display: block;
+}

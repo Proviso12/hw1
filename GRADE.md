@@ -2,31 +2,31 @@ I will update this file as part of the PR when I grade your work.
 
 ## API Request
 
-*Earned:* **-** */ 2*
+_Earned:_ **-** _/ 2_
 
 **Notes**
 
 ## API Response
 
-*Earned:* **-** */ 2*
+_Earned:_ **-** _/ 2_
 
 **Notes**
 
 ## Sensible CSS
 
-*Earned:* **-** */ 2*
+_Earned:_ **-** _/ 2_
 
 **Notes**
 
 ## Reset
 
-*Earned:* **-** */ 2*
+_Earned:_ **-** _/ 2_
 
 **Notes**
 
 ## Beyond Baseline
 
-*Earned:* **-** */ 2*
+_Earned:_ **-** _/ 2_
 
 **Notes**
 

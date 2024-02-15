@@ -1,0 +1,106 @@
+#cards {
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/perspective */
+    perspective: 1000px;
+    height:25em;
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-500%);
+    }
+    100% {
+      transform: translateX(0%);
+      animation-timing-function: ease-out;
+
+    }
+    
+  }
+  
+
+  /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+  .card {
+    background-color: transparent;
+    width: 150px;
+    height: 220px;
+    position: relative;
+  
+    flex-shrink: 0;
+  
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    transform-origin: 100%;
+
+    animation: 1s ease-out 0s 1 slideInLeft;
+    padding: 40px;
+  }
+  
+  /* When showing the fronts of cards: */
+  .fronts .card {
+    transform: rotateY(0deg);
+  }
+  
+  /* When showing the backs of cards: */
+  .backs .card {
+    transform: translateX(-150px) rotateY(180deg); 
+  }
+  
+  /* The front and back are absolute positioned to take up the whole size of the card. */
+  .front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    backface-visibility: hidden;
+  }
+  
+  .front {
+    background-color: #eee;
+  }
+  #Races .front{
+    background-image:url("../images/Dragonborn.png") ;
+    background-size: 160px;
+    
+  }
+  #Classes .front{
+    background-image:url("../images/Paladin.png") ;
+    background-size: 170px;
+  }
+  #Spells .front{
+    background-image:url("../images/Spells.png") ;
+    background-size: 150px;
+  }
+  #Monsters .front{
+    background-image:url("../images/Tarrasque.png") ;
+    background-size: 210px;
+  }
+
+  /* Style the back side */
+  .back {
+    background-color: #eee;
+    padding: 6px;
+    transform: rotateY(180deg);
+  }
+  /* Colored portion of the back. */
+  .back:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background:linear-gradient(135deg, #5b247a 0%,#1bcedf 100%);
+    border-radius: 8px;
+    border: 1px solid #444;
+  }
+
+  
+  
+  /* Set up an increasing delay for the nice cascade flip effect. */
+  .card:nth-child(1)  {transition-delay: 0.0s; }
+  .card:nth-child(2)  {transition-delay: 0.1s; }
+  .card:nth-child(3)  {transition-delay: 0.2s; }
+  .card:nth-child(4)  {transition-delay: 0.3s; }
+  .card:nth-child(5)  {transition-delay: 0.4s; }
+  .card:nth-child(6)  {transition-delay: 0.5s; }
+  .card:nth-child(7)  {transition-delay: 0.6s; }
+  .card:nth-child(8)  {transition-delay: 0.7s; }
+  .card:nth-child(9)  {transition-delay: 0.8s; }
+  .card:nth-child(10) {transition-delay: 0.9s; }
