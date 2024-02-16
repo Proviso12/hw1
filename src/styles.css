@@ -1,64 +1,72 @@
 
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Breathe Fire III";
+  src: url("../Fonts/BreatheFireIii-PKLOB.ttf");
+}
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 #welcome_Headers{
   background-color: #ffffff;
-  height:5em;
+  height:fit-content;
   text-align: center;
   font-size: x-large;
   font-weight: 600;
 }
+
+button {
+  font-size: 36px;
+  border-radius: 10px;
+  border-style: hidden;
+  font-family: "Breathe Fire III",sans-serif;
+  color:#af1111;
+  text-shadow:2px 2px #000000;
+}
+
 #cards {
   background-color: #af1111;
   width:auto;
-  height: auto;
-  padding: 10px;
-}
-
-body {
-  padding: 40px;
-}
-#suits {
+  height: fit-content;
   display: flex;
-  gap: 12px;
-  justify-content: space-between;
-  margin-bottom: 48px;
-}
-button {
-  flex-grow: 1;
-  font-size: 36px;
-  border-radius: 8px;
-}
-
-#cards {
-  display: flex;
-  gap: 24px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.spade card-suit:before,
-button.spade card-suit:before {
-  content: "\2660";
-  color: black;
-  display: block;
+#dice-Roller{
+  text-align: center;
+  font-size: larger;
 }
 
-.heart card-suit:before,
-button.heart card-suit:before {
-  content: "\2665";
-  color: red;
-  display: block;
+h1{
+  font-family: "Breathe Fire III",sans-serif;
+  color:#af1111;
+  font-size:70px;
+}
+h2{
+  font-size: larger;
+  font-weight: bold;
 }
 
-.club card-suit:before,
-button.club card-suit:before {
-  content: "\2663";
-  color: black;
-  display: block;
-}
+#dice{
+  display: flex;
 
-.diamond card-suit:before,
-button.diamond card-suit:before {
-  content: "\2666";
-  color: red;
-  display: block;
+  background-image:url("../images/Dice.png") ;
+  height: 300px;
+  background-position-x: right;
+  background-repeat: no-repeat;
+  justify-content: center;
+}
+#roll-Button{
+  height:fit-content;
+}
+#dice input{
+  height: fit-content;
+  max-width: 3em;
 }
