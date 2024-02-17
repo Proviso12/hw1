@@ -14,8 +14,12 @@ body{
   justify-content: center;
 }
 #welcome_Headers{
-  background-color: #ffffff;
-  height:fit-content;
+  background-image:url("../images/Barkeeper.png"),url("../images/Background_1.png");
+  background-size: 30vw,100vw;
+  background-repeat: no-repeat;
+  background-position:0px, -20%;
+  height: fit-content;
+  min-height:30vw;
   text-align: center;
   font-size: x-large;
   font-weight: 600;
@@ -54,19 +58,27 @@ h2{
   font-weight: bold;
 }
 
-#dice{
+#dice-Roller{
   display: flex;
-
   background-image:url("../images/Dice.png") ;
+  flex-direction: column;
   height: 300px;
   background-position-x: right;
   background-repeat: no-repeat;
+  align-content: center;
+}
+#dice{
+  display: flex;
+  flex-direction: row;
   justify-content: center;
+
 }
 #roll-Button{
   height:fit-content;
+  width:fit-content;
+  align-self:center;
 }
 #dice input{
   height: fit-content;
-  max-width: 3em;
+  max-width: 3vw;
 }

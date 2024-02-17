@@ -3,78 +3,124 @@ import "./cards.css";
 import "./card-layout.css";
 import "./styles.css";
 import { CardSuit } from './CardSuit'
+import internal from "stream";
+
+const dndDatabaseUrl = "https://www.dnd5eapi.co/api/"
 
 
 //API being used: D&D 5E API
 //link to the API docs : https://5e-bits.github.io/docs/
 // API Tutorials: https://5e-bits.github.io/docs/docs/tutorials
 
-const monsterInput = document.getElementById("monsterInput");
-const searchButton = document.getElementById("searchButton");
-const monsterResult = document.getElementById("monsterResult");
+// Cards
+const raceCard = document.querySelector("#Races #card_Type") as HTMLButtonElement;
+const classCard = document.querySelector("#Classes #card_Type") as HTMLButtonElement;
+const spellsCard = document.querySelector("#Spells #card_Type") as HTMLButtonElement;
+const monstersCard = document.querySelector("#Monsters #card_Type") as HTMLButtonElement;
 
-searchButton?.addEventListener("click", () => {
-  const monsterName = monsterInput?.value.toLowerCase();
-  if (monsterName) {
-    searchMonster(monsterName);
-  } else {
-    monsterResult.innerHTML = "Please enter a monster name.";
+
+const cardHandler = async (e: MouseEvent) => {
+  const apiQuery = (e.target as HTMLButtonElement).textContent?.toLowerCase() ?? '';
+
+  // this is what you'll be changing to match your website's needs
+  console.log(await SearchDndDatabase(apiQuery));
+}
+
+const setupCards = (): void => {
+  raceCard.addEventListener('click', cardHandler);
+  classCard.addEventListener('click', cardHandler);
+  spellsCard.addEventListener('click', cardHandler);
+  monstersCard.addEventListener('click', cardHandler);
+}
+setupCards();
+
+// Dice related stuff
+let diceAmount = document.querySelector('#dice-Amount') as HTMLInputElement;
+let diceResult = document.querySelector('#dice-Result') as HTMLUListElement;
+let diceType = document.querySelector("#dice-type") as HTMLSelectElement;
+document.querySelector('#roll-Button')?.addEventListener('click', (e: Event) => RollDice());
+
+
+
+function RollDice(): void {
+  let amount = Math.min(Number(diceAmount?.value), 10000);
+  let type = Number(diceType?.value);
+  let diceList: number[] = [];
+
+  // make sure the user knows that it's max 10000
+  diceAmount.value = amount.toString();
+
+  for (let i = 0; i < amount; i++) {
+    diceList.push(Math.floor(Math.random() * type + 1));
+    console.log(diceList[i]);
   }
-});
+  PrintDice(diceList);
+}
 
-function searchMonster(monsterName) {
-  monsterResult.innerHTML = "Searching...";
+function PrintDice(diceList: any[]): void {
+  while (diceResult.firstChild) {
+    diceResult.removeChild(diceResult.lastChild as Node);
+  }
+  diceList.forEach(element => {
+    let node = document.createElement("li");
 
-  axios
-    .get(`https://www.dnd5eapi.co/api/monsters`)
-    .then((response) => {
-      const monsters = response.data.results;
-      const matchedMonster = monsters.find(
-        (monster) => monster.name.toLowerCase() === monsterName
-      );
+    node.appendChild(document.createTextNode(element));
+    node.setAttribute("id", "book_Result");
 
-      if (matchedMonster) {
-        axios
-          .get(matchedMonster.url)
-          .then((monsterResponse) => {
-            const monsterData = monsterResponse.data;
-            monsterResult.innerHTML = `
-              <h2>${monsterData.name}</h2>
-              <p><strong>Index:</strong> ${monsterData.index}</p>
-              <!-- You can display more monster details here -->
-            `;
-          })
-          .catch((error) => {
-            monsterResult.innerHTML = "Error fetching monster details.";
-          });
-      } else {
-        monsterResult.innerHTML = "Monster not found.";
-      }
-    })
-    .catch((error) => {
-      monsterResult.innerHTML = "Error fetching monsters.";
-    });
+    diceResult.appendChild(node);
+  });
 }
 
 
-// Defining a <card-suit> Custom Element : https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
-customElements.define('card-suit', CardSuit)
-// We're not doing anything with Custom Elements (yet!), other than using <card-suit> in our HTML.
 
-// changes the className on section#cards from (fronts to backs) or (backs to fronts)
-const flipCards = () => {
-  const cards = document.querySelector<HTMLElement>('#cards')
-  if (cards) {
-    cards.className = cards.className === 'fronts' ? 'backs' : 'fronts'
-  }
-}
+/**
+ * Search DnD database
+ * @param query search term such as "ability-scores/cha" for charisma
+ * @returns Object in the format 
+ * {
+ * 'index': string, 
+ * 'name': string,
+ * 'full_name': string,
+ * 'desc': string,
+ * 'url': current url,
+ * 'etc...': any
+ *  }
+ */
+// {
+//   "ability-scores": "/api/ability-scores",
+//   "alignments": "/api/alignments",
+//   "backgrounds": "/api/backgrounds",
+//   "classes": "/api/classes",
+//   "conditions": "/api/conditions",
+//   "damage-types": "/api/damage-types",
+//   "equipment": "/api/equipment",
+//   "equipment-categories": "/api/equipment-categories",
+//   "feats": "/api/feats",
+//   "features": "/api/features",
+//   "languages": "/api/languages",
+//   "magic-items": "/api/magic-items",
+//   "magic-schools": "/api/magic-schools",
+//   "monsters": "/api/monsters",
+//   "proficiencies": "/api/proficiencies",
+//   "races": "/api/races",
+//   "rule-sections": "/api/rule-sections",
+//   "rules": "/api/rules",
+//   "skills": "/api/skills",
+//   "spells": "/api/spells",
+//   "subclasses": "/api/subclasses",
+//   "subraces": "/api/subraces",
+//   "traits": "/api/traits",
+//   "weapon-properties": "/api/weapon-properties"
+// }
+const SearchDndDatabase = async (query: string): Promise<object> => {
+  let data = {};
 
-// a generalized click handler, that does something different depending on the className of the target
-const handleButtonClick = (event: MouseEvent) => {
-  const button = event.currentTarget as HTMLButtonElement
-  if (button.className === 'flip') {
-    flipCards()
-  } else {
-    document.body.className = button.className
+  // This is optional, but we want to make sure we get JSON back
+  let fetchData = {
+    method: "GET",
+    headers: {'Content-Type': 'application/json'}
   }
+  let response = await fetch(`${dndDatabaseUrl}${query}`, fetchData);
+  data = await response.json();
+  return data;
 }

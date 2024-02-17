@@ -8,6 +8,10 @@
     0% {
       transform: translateX(-500vw);
     }
+    50%{
+      transform: translateX(-250vw);
+      rotate: 50deg;
+    }
     100% {
       transform: translateX(0%);   
     }
@@ -16,6 +20,7 @@
     0% {
       transform: translateX(-500vw);
     }
+    
     100% {
       transform: translateX(-500vw);   
     }
@@ -48,17 +53,18 @@
 
   }
   #Races #card_Type{
-    background-image:url("../images/Dragonborn.png") ;
+    background-image:url("../images/Dragonborn.png"), url("../images/Background_2.png");
     animation: 1s ease-out 0s 1 moveLeft, 1s ease-out 0s 1 slideInLeft;
 
   }
   #Classes #card_Type{
-    background-image:url("../images/Paladin.png") ;
+    background-image:url("../images/Paladin.png"), url("../images/Background_3.png");
     animation: 1s ease-out 0s 1 moveLeft, 1s ease-out .1s 1 slideInLeft;
 
   }
   #Spells #card_Type{
-    background-image:url("../images/Spells.png") ;
+    background-image:url("../images/Spells.png"), url("../images/Background_4.jpg");
+    background-size: 100%;
     animation: 1s ease-out 0s 1 moveLeft, 1s ease-out .3s 1 slideInLeft;
   }
   #Monsters #card_Type{
