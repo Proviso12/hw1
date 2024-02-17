@@ -67,18 +67,31 @@ h2{
   background-repeat: no-repeat;
   align-content: center;
 }
+
 #dice{
   display: flex;
   flex-direction: row;
   justify-content: center;
 
 }
+
 #roll-Button{
   height:fit-content;
   width:fit-content;
   align-self:center;
 }
+
 #dice input{
   height: fit-content;
   max-width: 3vw;
+}
+
+#card_Result{
+  height:fit-content;
+  display:flex;
+  gap:3px;
+}
+
+#card_List li{
+  
 }
