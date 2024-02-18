@@ -99,10 +99,10 @@ const SearchDndDatabase = async (query: string): Promise<object> => {
 function AddNamesToList(apiList: any): string[]
 {
   let nameList:string[] = [];
-  for (let name of apiList.results) {
-   
-     console.log(JSON.stringify(name));
-     nameList.push(JSON.stringify(name));
+  console.log("api size " + apiList.count);
+   for(let i=0; i<apiList.count; i++)
+   {
+    nameList.push(JSON.stringify(apiList.results[i].name));
    }
    return nameList;
 }
@@ -110,17 +110,47 @@ function AddNamesToList(apiList: any): string[]
 function PrintCards(nameList: any): void {
   cardList.innerHTML = "";
 
-  let node = document.createElement("li");
+ 
+
   let string ="I recommend using my good ol reliable for your next champaign: ";
-  let recommend = nameList[Math.floor(Math.random()*9)];
+  let num = nameList.length;
 
-  node.appendChild(document.createTextNode(string + recommend))
-  cardList.appendChild(node);
+  if(num>15) num=15;
+  let recommend = nameList[Math.floor(Math.random()*nameList.length)];
+  let recNode = document.createElement("li");
 
-  nameList.forEach(element => {
-    node.appendChild(document.createTextNode(element));
-  });
-  cardList.appendChild(node);
+  recNode.appendChild(document.createTextNode(string + recommend))
+  cardList.appendChild(recNode);
+  
+  let stringNode = document.createElement("li");
+  if(nameList.length<15)
+  {
+    string = "Here are all of your choices: ";
+    stringNode.appendChild(document.createTextNode(string));
+    cardList.appendChild(stringNode);
+
+    let node = document.createElement("li");
+    for(let i=0; i<num; i++)
+    {
+      node.appendChild(document.createTextNode(
+        nameList[i]));
+    }
+    cardList.appendChild(node);
+  }
+  else
+  {
+    string = "there are many more so here are only some of other choices: ";
+    stringNode.appendChild(document.createTextNode(string));
+    cardList.appendChild(stringNode);
+
+    let node = document.createElement("li");
+    for(let i=0; i<num; i++)
+    {
+      node.appendChild(document.createTextNode(
+        nameList[Math.floor(Math.random()*nameList.length)]));
+    }
+    cardList.appendChild(node);
+  }
 }
 
 //function which will gather the amount of dice that 
@@ -150,4 +180,7 @@ function PrintDice(diceList: any[]): void {
     node.appendChild(document.createTextNode(element));
     diceResult.appendChild(node);
   });
+
+  var audio = new Audio('Dice.mp3');
+  audio.play();
 }

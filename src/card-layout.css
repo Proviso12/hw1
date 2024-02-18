@@ -1,14 +1,4 @@
-#bottom {
-  transform: rotateZ(180deg) translate(0, 30%);
-  font-size: 30px;
-  margin: 5px;
-}
-#two #bottom {
-  transform: rotateZ(180deg) translate(0, 110%);
-}
-#three #bottom {
-  transform: rotateZ(180deg) translate(0, 200%);
-}
+
 #top {
   font-size: 30px;
   margin: 5px;

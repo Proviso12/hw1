@@ -73,6 +73,3 @@
     background-size: 125%;
 
   }
-
-  /* Set up an increasing delay for the nice cascade flip effect. */
-  .card:nth-child(2)  {transition-delay: 0.1s; }
